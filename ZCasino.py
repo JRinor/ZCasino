@@ -3,7 +3,7 @@
 
 from random import randint
 import time
-
+from math import ceil
 
 solde = 0.0
 
@@ -70,6 +70,7 @@ def casino():
 			couleur1 = "noir"
 		print(f"[INFO] Vous avez choisie le numéro {numero} qui est de couleur {couleur1}")
 		argentmiser = miseargent()
+		retirer(argentmiser)
 		print("[INFO] Lancement de la roue !")
 		print("....")
 		time.sleep(1)
@@ -86,14 +87,13 @@ def casino():
 		if numero == random:
 			print("[Croupier] Vous êtes tombé sur le numéro juste !!!")
 			print("[INFO] Vous avez gagner !")
-			ajouter(argentmiser)
+			ajouter(ceil(argentmiser * 3))
 		elif couleur1 == couleur:
 			print("[Croupier] Vous n'avez pas gagner mais vous êtes tombé sur la même couleur")
 			print(".. Vous repartez donc avec la moitié de votre mise initial.")
-			ajouter(argentmiser / 2)
+			ajouter(ceil(argentmiser / 2))
 		else:
 			print("[Croupier] Vous avez perdu cette fois.")
-			retirer(argentmiser)
 
 		if return_solde() > 0:
 			while True:
