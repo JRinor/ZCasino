@@ -10,20 +10,23 @@ solde = 0.0
 def initialiser(montant_initial):
     global solde
     solde = montant_initial
-    print(f"Solde initial : {solde} €")
 
 def retirer(montant):
     global solde
     solde -= montant
-    print(f"{montant} € retiré. Nouveau solde : {solde} €")
+    print(f"[INFO] {montant} € retiré. Nouveau solde : {solde} €")
 
 def ajouter(montant):
     global solde
     solde += montant
-    print(f"{montant} € ajouté. Nouveau solde : {solde} €")
+    print(f"[INFO] {montant} € ajouté. Nouveau solde : {solde} €")
 
 def afficher_solde():
-    print(f"Votre solde actuel est de {solde} €")
+    print(f"[INFO] Votre solde actuel est de {solde} €")
+
+def return_solde():
+	global solde
+	return solde
 
 def choixnumero():
 	while True:
@@ -92,20 +95,23 @@ def casino():
 			print("[Croupier] Vous avez perdu cette fois.")
 			retirer(argentmiser)
 
-		while True:
-			try:
-				choix = str(input("[INFO] Voulez vous continuer de jouer ? (O(ui) - N(on)? "))
-				if choix == "O" or choix == "Oui":
-					jouer = 1
-					break
-				elif choix == "N" or choix == "Non":
-					jouer = 0
-					
-					break
-				else: 
-					raise ValueError
-			except ValueError:
-				print("[INFO] Je n'ai pas bien compris.")
+		if return_solde() > 0:
+			while True:
+				try:
+					choix = str(input("[INFO] Voulez vous continuer de jouer ? (O(ui) - N(on)? "))
+					if choix == "O" or choix == "Oui" or choix == "o":
+						jouer = 1
+						break
+					elif choix == "N" or choix == "Non" or choix == "n":
+						jouer = 0	
+						break
+					else: 
+						raise ValueError
+				except ValueError:
+					print("[INFO] Je n'ai pas bien compris.")
+		else:
+			jouer = 0
+			print("[INFO] Vous avez perdu l'entièreter de votre argent.")
 
 	else:
 		print("[INFO] Fin.")
