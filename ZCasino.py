@@ -6,6 +6,7 @@ import time
 from math import ceil
 
 solde = 0.0
+jouer = 1
 
 def initialiser(montant_initial):
     global solde
@@ -59,8 +60,7 @@ def randomnum():
 
 def casino():
 	initialiser(1000)
-
-	jouer = 1
+	global jouer
 	while jouer == 1:
 		afficher_solde()
 		numero = choixnumero()
@@ -87,7 +87,7 @@ def casino():
 		if numero == random:
 			print("[Croupier] Vous êtes tombé sur le numéro juste !!!")
 			print("[INFO] Vous avez gagner !")
-			ajouter(ceil(argentmiser * 3))
+			ajouter(ceil( argentmiser + argentmiser * 3))
 		elif couleur1 == couleur:
 			print("[Croupier] Vous n'avez pas gagner mais vous êtes tombé sur la même couleur")
 			print(".. Vous repartez donc avec la moitié de votre mise initial.")
@@ -117,9 +117,6 @@ def casino():
 		print("[INFO] Fin.")
 
 
-
-
-# Test de la fonction principale
 if __name__ == "__main__":
     resultat = casino()
     print(resultat)
